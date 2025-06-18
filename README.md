@@ -106,9 +106,37 @@ detail = MORE
 
 ## 6. Usage
 
+### Web Interface (Recommended)
+
+The easiest way to use the scraper is through the web interface:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the web application
+python run_web_app.py
+```
+
+Then open your browser and navigate to `http://localhost:12000`
+
+**Features of the Web Interface:**
+- 🔐 Secure login using credentials from [`In/config.ini`](In/config.ini)
+- 📁 Upload URL files (TXT or CSV format)
+- 📊 Real-time progress tracking with visual progress bar
+- 📈 Quick stats dashboard showing file counts and progress
+- 📥 Download all output files (CSV, Excel, JSON, logs)
+- 🎨 Modern, responsive user interface with status indicators
+- ⚡ Auto-refresh during scraping operations
+- 🛡️ Secure file handling and validation
+
+### Command Line Interface
+
+Alternatively, run the scraper from the command line:
+
 ### Basic Operation
 
-1. **Configure credentials**: Edit [`config.ini`](config.ini) with your login credentials
+1. **Configure credentials**: Edit [`config.ini`](In/config.ini) with your login credentials
 2. **Prepare URL list**: Add target URLs to [`urls.txt`](urls.txt) (one per line)
 3. **Run the scraper**:
    ```bash
@@ -147,15 +175,36 @@ The scraper generates several types of output files:
 ```
 slap-red-scraper/
 ├── main.py                    # Main application entry point
-├── config.ini                 # Configuration file
-├── requirements.txt           # Python dependencies
-├── urls.txt                   # Target URLs list
-├── src/                       # Source code modules
-│   ├── services/             # Core business logic
-│   ├── analysis/             # Data analysis components
-│   ├── config/               # Configuration management
-│   └── utils/                # Utility functions
+├── web_app.py                 # Flask web interface application
+├── run_web_app.py            # Web application launcher script
+├── requirements.txt          # Python dependencies
+├── In/
+│   └── config.ini            # Configuration file
+├── src/                      # Source code modules
+│   ├── ui/                   # User interface components
+│   │   ├── app.py           # Original Flask application
+│   │   └── ui.py            # Console UI handler
+│   ├── core/                # Core configuration
+│   ├── io/                  # Input/output handling
+│   ├── log/                 # Logging configuration
+│   ├── proc/                # Data processing and models
+│   └── acq/                 # Data acquisition (API, auth)
 ├── data/                     # Output data files
+│   ├── historical_bonuses.xlsx  # Excel archive
+│   ├── comparison_report_*.csv  # Daily comparison reports
+│   └── *.csv                # Daily bonus data files
 ├── logs/                     # Log files
-└── cache/                    # Cache and metrics files
+│   └── bonus.log            # JSON Lines format logs
+├── cache/                    # Cache and metrics
+│   └── run_metrics_cache.json  # Performance metrics
+├── temp/                     # Temporary files
+└── util/                     # Utility functions
 ```
+
+### Key Components
+
+- **`run_webapp.py`**: Launch script for the Flask web interface
+- **`src/ui/app.py`**: Complete Flask web application with authentication, file upload, progress tracking, and result downloads
+- **`main.py`**: Command-line interface for the scraper
+- **`In/config.ini`**: Configuration file with authentication and scraper settings
+- **`out/`**: Directory containing all output files (CSV, JSON, database)
