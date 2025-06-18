@@ -1,0 +1,9 @@
+🔍 Starting Slap Red Scraper Web Application...
+📍 Access the application at: http://localhost:12000
+🔑 Use the credentials from In/config.ini to log in
+⏹️  Press Ctrl+C to stop the server
+--------------------------------------------------
+ * Serving Flask app 'simple_webapp'
+ * Debug mode: on
+Address already in use
+Port 12000 is in use by another program. Either identify and stop that program, or start the server with a different port.

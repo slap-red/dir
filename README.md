@@ -154,7 +154,7 @@ The easiest way to use the scraper is through the web interface:
 pip install -r requirements.txt
 
 # Start the web application
-python app.py
+python run_app.py
 ```
 
 Then open your browser and navigate to `http://localhost:12000`
@@ -215,6 +215,7 @@ The scraper generates several types of output files:
 slap-red-scraper/
 ├── main.py                    # Main application entry point
 ├── app.py                     # Flask web interface application
+├── run_app.py                 # Web application launcher script
 ├── requirements.txt          # Python dependencies
 ├── In/
 │   └── config.ini            # Configuration file

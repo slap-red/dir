@@ -64,7 +64,7 @@ def main():
     
     # Start the web application
     try:
-        from web_app import app
+        from app import app
         app.run(host='0.0.0.0', port=12000, debug=False)
     except KeyboardInterrupt:
         print("\n👋 Web server stopped")
