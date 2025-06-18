@@ -8,9 +8,20 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import src.io.io_handler as io_handler
-from main import main as run_scraper
-import src.log.logger_config as logger_config
+try:
+    import src.io.io_handler as io_handler
+    import src.log.logger_config as logger_config
+except ImportError:
+    # Fallback for when modules don't exist yet
+    io_handler = None
+    logger_config = None
+
+# Import main scraper function if available
+try:
+    from main import main as run_scraper
+except ImportError:
+    def run_scraper():
+        pass  # Placeholder function
 
 
 app = Flask(__name__)
@@ -184,7 +195,10 @@ def login():
 def index():
     """Renders the main scraper interface."""
     try:
-        scraper_status["data_file_path"] = io_handler.get_output_path("output_bonuses_batch.json", base_data_dir=DATA_FOLDER_FOR_SCRAPER)
+        if io_handler:
+            scraper_status["data_file_path"] = io_handler.get_output_path("output_bonuses_batch.json", base_data_dir=DATA_FOLDER_FOR_SCRAPER)
+        else:
+            scraper_status["data_file_path"] = ""
     except:
         scraper_status["data_file_path"] = ""
     return render_template_string(INDEX_HTML, status=scraper_status)
@@ -205,7 +219,7 @@ def run_scraper_route():
         scraper_status.update({"message": "No file uploaded", "progress": 0, "total": 0})
         return redirect(url_for('index'))
     
-    logger = logger_config.setup_logger()
+    logger = logger_config.setup_logger() if logger_config else None
     try:
         urls = url_file.read().decode('utf-8').splitlines()
         urls = [url.strip() for url in urls if url.strip()]  # Clean up URLs
