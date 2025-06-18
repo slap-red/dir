@@ -38,7 +38,7 @@ pip install -r requirements.txt
 # 3. Add target URLs to urls.txt
 
 # 4. Start the web interface (recommended)
-python run_webapp.py
+python app.py
 # Then visit http://localhost:12000
 
 # OR run from command line
@@ -154,7 +154,7 @@ The easiest way to use the scraper is through the web interface:
 pip install -r requirements.txt
 
 # Start the web application
-python run_web_app.py
+python app.py
 ```
 
 Then open your browser and navigate to `http://localhost:12000`
@@ -214,8 +214,7 @@ The scraper generates several types of output files:
 ```text
 slap-red-scraper/
 ├── main.py                    # Main application entry point
-├── web_app.py                 # Flask web interface application
-├── run_web_app.py            # Web application launcher script
+├── app.py                     # Flask web interface application
 ├── requirements.txt          # Python dependencies
 ├── In/
 │   └── config.ini            # Configuration file
@@ -242,8 +241,8 @@ slap-red-scraper/
 
 ### Key Components
 
-- **`run_webapp.py`**: Launch script for the Flask web interface
-- **`src/ui/app.py`**: Complete Flask web application with authentication, file upload, progress tracking, and result downloads
+- **`app.py`**: Complete Flask web application with authentication, file upload, progress tracking, and result downloads
+- **`src/ui/app.py`**: Original Flask application (legacy)
 - **`main.py`**: Command-line interface for the scraper
 - **`In/config.ini`**: Configuration file with authentication and scraper settings
 - **`out/`**: Directory containing all output files (CSV, JSON, database)
